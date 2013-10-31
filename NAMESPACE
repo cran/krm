@@ -1,0 +1,13 @@
+useDynLib(krm)
+
+export(krm.score.test, krm.most)
+export(getSeqKernel)
+export(sim.liu.2008, sim.liu.2007, chi.norm)
+
+export(readFastaFile, writeFastaFile, 
+    aa2arabic, string2arabic, stringList2arabicFile, readArabicFile, arabic2arabicFile, arabic2fastaFile, fastaFile2arabicFile,
+    selexFile2arabicFile, readSelexAsMatrix, readSelexFile, 
+    readBlockFile
+)
+export(alignment2count, alignment2trancount, calcPairwiseIdentity, removeGap)
+export(rmdirichlet, rdirichlet, ddirichlet, dmdirichlet, modifyDirichlet, logIntegrateDirichlet, logIntegrateMixDirichlet, readPriorFromFile, hmmMargLlik)
