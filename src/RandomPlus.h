@@ -9,23 +9,6 @@ class RandomPlus
 
 public:
 	
-    // from 1:n pick k numbers and write it to y 
-	template <class T>
-    static void SampleWithoutReplacement(int n, int k, T* y, bool zeroBased=false) // Change from T n, T k to int n, int k (2013-11-01)
-    {
-        T i, j;
-        T x[n]; // a temp array
-        for (i = 0; i < n; i++)
-    	    x[i] = i;
-        for (i = 0; i < k; i++) {
-        	j = (T) (n * myunif_rand());
-        	if (!zeroBased) 
-				y[i] = x[j] + 1;
-        	else
-				y[i] = x[j];
-        	x[j] = x[--n];
-        }
-    }
 	template <class T>
     static void SampleWithoutReplacement(int n, std::vector<T> & y, bool zeroBased=false)
     {

@@ -54,10 +54,18 @@ boolean
 \examples{
 
 \dontrun{
-# this example is not run during package build because it takes a little too long to run
+# the examples are not run during package build because it takes a little too long to run
+
 data=sim.liu.2008 (n=100, a=.1, seed=1) 
-test = krm.most(y~x, data, regression.type="logistic", 
-    formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf")
+test = krm.most(y~x, data, formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf")
+
+
+dat.file.name=paste(system.file(package="krm")[1],'/misc/y1.txt', sep="") 
+seq.file.name=paste(system.file(package="krm")[1],'/misc/sim1.fasta', sep="")
+dat=read.table(dat.file.name); names(dat)="y"
+test = krm.most (y~1, dat, seq.file.name=seq.file.name, kern.type="mi")
+
+
 } 
 
 

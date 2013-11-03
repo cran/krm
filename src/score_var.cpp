@@ -1,5 +1,5 @@
 #include <sstream>
-#include <cmath>
+#include <math.h>
 
 extern "C" {  
 

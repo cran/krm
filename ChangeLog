@@ -15,7 +15,11 @@
 	* Copy several matrix functions from Krisz's kutil package
 
 2013-10-31  Youyi Fong
-	* replace variable length array with std::vector<>
+	* replace variable length array with std::vector<> at the suggestion of Prof.
+	Ripley 
 	* replace 2D arrays used in proteinsequence.cpp with new int[]
 
+2013-11-03  Youyi Fong
+	* fix issues causing Solaris compilation errors at the suggestion of Prof.
+	Ripley
 	

@@ -1,6 +1,9 @@
 #ifndef U_H
 #define U_H
 
+// added at the suggestion of Prof. Ripley
+#include <stdio.h>
+
 #include <cstdlib>
 #include <string>
 #include <vector>
@@ -8,9 +11,11 @@
 #include <fstream>
 #include <sstream>
 #include <math.h>
-#include "dirent.h"
-#include "unistd.h"
-#include "time.h"
+#include <dirent.h>
+#include <unistd.h>
+#include <time.h>
+
+#include <R.h>
 
 using namespace std;
 
@@ -327,8 +332,8 @@ public:
 		if (howMany==1) return logValues[0]+log(weights[0]);
 
 		double maximum=arraymax(logValues, howMany);
-		if (maximum==log(0)) return log(0);
-		if (maximum==-log(0)) return -log(0);
+		if (maximum==R_NegInf) return R_NegInf;
+		if (maximum==R_PosInf) return R_PosInf;
 
 		double *shiftedLogValues = new double [howMany];
 		for (int i=0; i<howMany; i++) shiftedLogValues[i]=logValues[i]-maximum;
@@ -342,8 +347,8 @@ public:
 		if (howMany==1) return logValues[0]+log(weights[0]);
 
 		double maximum=arraymax(logValues);
-		if (maximum==log(0)) return log(0);
-		if (maximum==-log(0)) return -log(0);
+		if (maximum==R_NegInf) return R_NegInf;
+		if (maximum==R_PosInf) return R_PosInf;
 
 		double *shiftedLogValues = new double [howMany];
 		for (int i=0; i<howMany; i++) shiftedLogValues[i]=logValues[i]-maximum;
@@ -357,8 +362,8 @@ public:
 		if (howMany==1) return logValues[0]+logWeights[0];
 
 		double maximum=arraymax(logValues, howMany);
-		if (maximum==log(0)) return log(0);
-		if (maximum==-log(0)) return -log(0);
+		if (maximum==R_NegInf) return R_NegInf;
+		if (maximum==R_PosInf) return R_PosInf;
 
 		double *shiftedLogValues = new double [howMany];
 		for (int i=0; i<howMany; i++) shiftedLogValues[i]=logValues[i]-maximum;

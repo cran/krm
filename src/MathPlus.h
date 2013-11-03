@@ -55,7 +55,7 @@ public:
 	// seqno, row, and col are all 0-based
 	static void getRowCol (int seqno, int & row, int & col) {
 		seqno ++; // make it start from 1
-		row = floor (sqrt (seqno * 2));
+		row = floor (sqrt ((double)(seqno * 2)) );
 		col = seqno - row * (row + 1) /2 - 1; 
 		if (col >= 0) 
 			row ++;
