@@ -1,14 +1,22 @@
-getSeqKernel <- function(sequences, kern.type=c("mm", "prop", "mi"), tau, call.C=TRUE) {
+getSeqKernel <- function(sequences, kern.type=c("mm", "prop", "mi"), tau, call.C=TRUE, seq.start=NULL, seq.end=NULL) {
     
     kern.type <- match.arg(kern.type)    
     
     if (is.character(sequences)) {
+        # sequences is a file name
         seq.file.name=sequences
         seq.alignment <- readFastaFile(seq.file.name)
+        
     } else if (is.list(sequences)) {
+        # sequences is a list of strings
         if (is.null(names(sequences))) names(sequences)=1:length(sequences)
         seq.alignment = sequences
-        call.C=FALSE # C/C++ function needs sequence file name as input
+        # get substr
+        if (!is.null(seq.start) & !is.null(seq.end)) {
+            for (i in 1:length(seq.alignment)) {
+                seq.alignment[[i]]=substr(seq.alignment[[i]], seq.start, seq.end)
+            }
+        }
     } else stop("sequences input incorrect, should be either sequence file name or a list of strings")
     
     N=length(seq.alignment)
@@ -44,16 +52,16 @@ getSeqKernel <- function(sequences, kern.type=c("mm", "prop", "mi"), tau, call.C
         
     } else if (kern.type == "prop") {    
     
-#       factanal(aa.prop.list[,4:13], factors=5) suggests 5 factors(properties) are enough
+#       factanal(krm::aa.prop.list[,4:13], factors=5) suggests 5 factors(properties) are enough
         K=7       
-        prop.final <- matrix(0, nrow=20, ncol=K,dimnames=list(aa.prop.list[,1],c("Surface_Area_Chothia","Hydrophobicity_Engleman","Refractivity_Jones","Polarity_Jones","Residue_Volume_Zamayatin","Bulkiness_Jones","Hydrophilicity_Hopp")))
-        prop.final[,"Surface_Area_Chothia"]=aa.prop.list[,"Surface_Area_Chothia"]/max(abs(aa.prop.list[,"Surface_Area_Chothia"]))
-        prop.final[,"Refractivity_Jones"]=aa.prop.list[,"Refractivity_Jones"]/max(abs(aa.prop.list[,"Refractivity_Jones"]))
-        prop.final[,"Hydrophobicity_Engleman"]=aa.prop.list[,"Hydrophobicity_Engleman"]/max(abs(aa.prop.list[,"Hydrophobicity_Engleman"]))
-        prop.final[,"Polarity_Jones"]=aa.prop.list[,"Polarity_Jones"]/max(abs(aa.prop.list[,"Polarity_Jones"]))
-        prop.final[,"Residue_Volume_Zamayatin"]=aa.prop.list[,"Residue_Volume_Zamayatin"]/max(abs(aa.prop.list[,"Residue_Volume_Zamayatin"]))
-        prop.final[,"Bulkiness_Jones"]=aa.prop.list[,"Bulkiness_Jones"]/max(abs(aa.prop.list[,"Bulkiness_Jones"]))
-        prop.final[,"Hydrophilicity_Hopp"]=aa.prop.list[,"Hydrophilicity_Hopp"]/max(abs(aa.prop.list[,"Hydrophilicity_Hopp"]))
+        prop.final <- matrix(0, nrow=20, ncol=K,dimnames=list(krm::aa.prop.list[,1],c("Surface_Area_Chothia","Hydrophobicity_Engleman","Refractivity_Jones","Polarity_Jones","Residue_Volume_Zamayatin","Bulkiness_Jones","Hydrophilicity_Hopp")))
+        prop.final[,"Surface_Area_Chothia"]=krm::aa.prop.list[,"Surface_Area_Chothia"]/max(abs(krm::aa.prop.list[,"Surface_Area_Chothia"]))
+        prop.final[,"Refractivity_Jones"]=krm::aa.prop.list[,"Refractivity_Jones"]/max(abs(krm::aa.prop.list[,"Refractivity_Jones"]))
+        prop.final[,"Hydrophobicity_Engleman"]=krm::aa.prop.list[,"Hydrophobicity_Engleman"]/max(abs(krm::aa.prop.list[,"Hydrophobicity_Engleman"]))
+        prop.final[,"Polarity_Jones"]=krm::aa.prop.list[,"Polarity_Jones"]/max(abs(krm::aa.prop.list[,"Polarity_Jones"]))
+        prop.final[,"Residue_Volume_Zamayatin"]=krm::aa.prop.list[,"Residue_Volume_Zamayatin"]/max(abs(krm::aa.prop.list[,"Residue_Volume_Zamayatin"]))
+        prop.final[,"Bulkiness_Jones"]=krm::aa.prop.list[,"Bulkiness_Jones"]/max(abs(krm::aa.prop.list[,"Bulkiness_Jones"]))
+        prop.final[,"Hydrophilicity_Hopp"]=krm::aa.prop.list[,"Hydrophilicity_Hopp"]/max(abs(krm::aa.prop.list[,"Hydrophilicity_Hopp"]))
         seq.matrix <- matrix(0, nrow=N, ncol=(I*K))
         for (n in 1:N) {
             for (i in 1:I) {
@@ -95,7 +103,7 @@ getSeqKernel <- function(sequences, kern.type=c("mm", "prop", "mi"), tau, call.C
                        
         if (!call.C) {
             
-            aaPrior=cloud9
+            aaPrior=krm::cloud9
             dat <- string2arabic(seq.alignment)
             N=nrow(dat)
             
@@ -115,8 +123,9 @@ getSeqKernel <- function(sequences, kern.type=c("mm", "prop", "mi"), tau, call.C
             N=length(seq.alignment)
             kernel.dist <- matrix(0.0, nrow=N, ncol=N)
             if (!is.double(kernel.dist)) kernel.dist <- as.double(kernel.dist)
-        
-            aux=.C("MI_kernel", dataFileCh=as.character(seq.file.name), dataFileLen=nchar(seq.file.name), tau=as.double(tau), K=kernel.dist)
+            
+            #aux=.C("MI_kernel", dataFileCh=as.character(seq.file.name), dataFileLen=nchar(seq.file.name), tau=as.double(tau), K=kernel.dist)
+            aux=.C("MI_kernel_str", seq=concatList(seq.alignment,sep=""), nSeq=N, seqLength=I, tau=as.double(tau), K=kernel.dist)
             kernel.dist=aux$K
         
         } # end if !call.C

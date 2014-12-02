@@ -1,13 +1,13 @@
-### --- Test setup ---
+library("RUnit")
+library("krm")
+
 
 test.krm.mos.test <- function() {
 
 
-library("RUnit")
-library("krm")
 tolerance=1e-3
 # more stringent tolerance for one system to ensure algorithm accuracy
-if (R.Version()$system %in% c("x86_64, mingw32")) {
+if(file.exists("D:/gDrive/3software/_checkReproducibility")) {
     tolerance=1e-6
 } 
 RNGkind("Mersenne-Twister", "Inversion")
@@ -23,20 +23,20 @@ seq.file.name=paste(system.file(package="krm")[1],'/misc/sim1.fasta', sep="") # 
 # parametric bootstrap
 data=sim.liu.2008 (n=100, a=.1, seed=1) 
 test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", n.rho=2, n.mc = 100, range.rho=.99, verbose=TRUE)
-checkEqualsNumeric(test, c(0.91,   0.90,   0.93,   0.91), tolerance = tolerance)
+checkEqualsNumeric(test$p.values, c(0.91,   0.90,   0.93,   0.91), tolerance = tolerance)
 
 # perturbation
 data=sim.liu.2008 (n=100, a=.1, seed=1) 
 test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", n.rho=2, n.mc = 100, inference.method="perturbation", verbose=TRUE)
 # mvrnorm behaves differently between 32 bit and 64 bit
 if (R.Version()$system %in% c("x86_64, mingw32")) {
-    checkEqualsNumeric(test, c(0.87,     NA,   0.89,     NA), tolerance = tolerance)
+    checkEqualsNumeric(test$p.values, c(0.87,     NA,   0.89,     NA), tolerance = tolerance)
 } 
 
 # LGL2008
 data=sim.liu.2008 (n=50, a=.1, seed=1) 
-test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", n.mc = 100, range.rho=.99, inference="LGL2008", verbose=TRUE)
-checkEqualsNumeric(test, 0.1223421, tolerance = tolerance)
+test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", n.mc = 100, range.rho=.99, inference.method="Davies", verbose=TRUE)
+checkEqualsNumeric(test$p.values, 0.1223421, tolerance = tolerance)
 
 # todo: add linear kernel
 
@@ -48,10 +48,16 @@ checkEqualsNumeric(test, 0.1223421, tolerance = tolerance)
 
 # parametric bootstrap
 dat=read.table(dat.file.name); names(dat)="y"
+dat=cbind(dat, seq=unlist(readFastaFile(seq.file.name))); dat$seq=as.character(dat$seq)
+
 test = krm.most (y~1, dat, regression.type="logistic", seq.file.name=seq.file.name, kern.type="mi", n.rho=2, n.mc = 5e1, inference.method="parametric.bootstrap", verbose=TRUE)
-checkEqualsNumeric(test, c(0.68,   0.60,   0.66,   0.60), tolerance = tolerance)
+checkEqualsNumeric(test$p.values, c(0.68,   0.60,   0.66,   0.60), tolerance = tolerance)
 
+test.2 = krm.most (y~1, dat, regression.type="logistic", formula.kern=~seq, kern.type="mi", n.rho=2, n.mc = 5e1, inference.method="parametric.bootstrap", verbose=TRUE)
+checkEqualsNumeric(test.2$p.values, c(0.68,   0.60,   0.66,   0.60), tolerance = tolerance)
 
+test.3 = krm.most (y~1, dat, regression.type="logistic", formula.kern=~seq, kern.type="mi", n.rho=2, n.mc = 5e1, inference.method="parametric.bootstrap", seq.start=1, seq.end=10, verbose=TRUE)
+checkEqualsNumeric(test.3$p.values, c(0.62,   0.48,   0.54,   0.46), tolerance = tolerance)
 
 
 ## performance 

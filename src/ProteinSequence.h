@@ -72,6 +72,7 @@ class ProteinSequence : public Observable {
 
 public: 
 	ProteinSequence (string sequenceFileName, stringstream& priorStream, ostream& _logFile );
+	ProteinSequence (vector<string> seqString, stringstream& priorStream, ostream& _logFile );
 	~ProteinSequence ();
 	
 	double getClusterFit (const int* z, int j) const;
@@ -91,6 +92,7 @@ private:
 
 	void readSeqNamesFromFasta (const char * fileName, vector<string>& seqNames) const;
 	void readFastaFile (string fileName);
+	void setSequence (vector<string> seqString);
 	int getAAcount(const int *z, short j, int * count) const;
     void getAAcount(int i, int j, int * count) const;
 	void getTranCount(const int *z, short j, int * taoCount, int * nuCount) const;

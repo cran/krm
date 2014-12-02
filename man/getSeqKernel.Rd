@@ -8,7 +8,8 @@ Protein Sequence Kernels
 Get mutual information and other kernels for protein sequences
 }
 \usage{
-getSeqKernel (sequences, kern.type=c("mm", "prop", "mi"), tau, call.C=TRUE) 
+getSeqKernel (sequences, kern.type=c("mm", "prop", "mi"), tau, call.C=TRUE
+    , seq.start=NULL, seq.end=NULL) 
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,6 +25,13 @@ Numeric. It is the same as rho^-2.
   \item{call.C}{
 Boolean. If TRUE, do a .C call. If FALSE, the implementation is in R. The .C call is 50 times faster.
 }
+  \item{seq.start}{
+integer. Start position of subsequence to be used in computing kernel.
+}
+  \item{seq.end}{
+integer. End position of subsequence to be used in computing kernel.
+}
+
 }
 \details{
 call.C option is to allow comparison of R and C implementation. The two should give the same results and C implementation is 50 times faster. 

@@ -5,7 +5,7 @@
 Adjusted Score Test
 }
 \description{
-Performs adjusted score test for logistic models with kernel random effect.
+Adjusted score test for kernel-based regression models. This function is typically not used directly, but is called within krm.most().
 }
 \usage{
 krm.score.test(formula, data, K, regression.type=c("logistic","linear"), verbose=FALSE)
@@ -33,7 +33,7 @@ Boolean
 dat=sim.liu.2008(n=100, a=0, seed=1)
 z=as.matrix(subset(dat, select=c(z.1,z.2,z.3,z.4,z.5)))
 rho=1
-K=krm:::getK(z,kernel="rbf",para=rho^-2)
+K=kyotil::getK(z,kernel="rbf",para=rho^-2)
 krm.score.test (y~x, dat, K, regression.type="logistic") 
 
 

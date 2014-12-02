@@ -1,9 +1,8 @@
 #ifndef U_H
 #define U_H
 
-// added at the suggestion of Prof. Ripley
-#include <stdio.h>
 
+#include <stdio.h>
 #include <cstdlib>
 #include <string>
 #include <vector>
@@ -14,8 +13,7 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <time.h>
-
-#include <R.h>
+#include <R.h> // added at the suggestion of Prof. Ripley
 
 using namespace std;
 

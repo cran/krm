@@ -12,29 +12,19 @@ ProteinSequence::ProteinSequence(string sequenceFileName, stringstream& priorStr
 	//muPrior.show(logFile);
 }
 
+ProteinSequence::ProteinSequence(vector<string> seqString, stringstream& priorStream, ostream& _logFile) 
+: logFile(_logFile), muPrior(priorStream), taoPrior(C2, taoHyperParam), nuPrior(C2, nuHyperParam)
+{
+	setSequence(seqString);
+}
+
 ProteinSequence::~ProteinSequence() {
     for (int i=0; i<n; i++) 
         delete[] sequence[i];
     delete[] sequence;
 }
 
-void ProteinSequence::readFastaFile (string fileName) {
-	ifstream msaFile; //multiple sequence alignment file
-    U::openRead (msaFile, fileName, logFile);
-	vector<string> seqString;
-	string seqName, seqPart, seq;
-	getline(msaFile, seqName);
-	while (!msaFile.eof()) {
-		seq = "";
-		getline(msaFile, seqPart);
-		while (!msaFile.eof() && seqPart.compare (0, 1, ">")!=0) {
-			seq += seqPart;
-			getline(msaFile, seqPart);
-		}
-		seqString.push_back(seq); 
-	}
-	msaFile.close();
-	
+void ProteinSequence::setSequence (vector<string> seqString) {
 	n=seqString.size();
 	T=seqString[0].length();
 
@@ -59,6 +49,25 @@ void ProteinSequence::readFastaFile (string fileName) {
     #ifdef __DEBUG__
 	//U::print2Dmatrix(sequence, n, T, logFile);
 	#endif
+ }
+
+void ProteinSequence::readFastaFile (string fileName) {
+	ifstream msaFile; //multiple sequence alignment file
+    U::openRead (msaFile, fileName, logFile);
+	vector<string> seqString;
+	string seqName, seqPart, seq;
+	getline(msaFile, seqName);
+	while (!msaFile.eof()) {
+		seq = "";
+		getline(msaFile, seqPart);
+		while (!msaFile.eof() && seqPart.compare (0, 1, ">")!=0) {
+			seq += seqPart;
+			getline(msaFile, seqPart);
+		}
+		seqString.push_back(seq); 
+	}
+	msaFile.close();
+	setSequence(seqString);
 }
 
 void ProteinSequence::readSeqNamesFromFasta (const char * fileName, vector<string>& seqNames) const {

@@ -1,10 +1,9 @@
-### --- Test setup ---
+library("RUnit")
+library("krm")
+
 
 test.krm.score.test <- function() {
 
-
-library("RUnit")
-library("krm")
 tolerance=1e-3
 # more stringent tolerance for one system to ensure algorithm accuracy
 if (R.Version()$system %in% c("x86_64, mingw32")) {
@@ -16,7 +15,7 @@ RNGkind("Mersenne-Twister", "Inversion")
 dat=sim.liu.2008(n=100, a=0, seed=1)
 z=as.matrix(subset(dat, select=c(z.1,z.2,z.3,z.4,z.5)))
 rho=1
-K=krm:::getK(z,kernel="rbf",para=rho^-2)
+K=kyotil::getK(z,kernel="rbf",para=rho^-2)
 
 test = krm.score.test (y~x, dat, K, regression.type="logistic") 
 checkEqualsNumeric(test, c(0.3708008, 0.2130736, 0.3552138, 0.2102588), tolerance = tolerance)
@@ -29,7 +28,7 @@ checkEqualsNumeric(test, c(0.3492788,        NA, 0.3327407,        NA), toleranc
 #dat=sim.liu.2008(n=50, a=0, seed=1)
 #z=as.matrix(subset(dat, select=c(z.1,z.2,z.3,z.4,z.5)))
 #rho=1
-#K=krm:::getK(z,kernel="rbf",para=rho^-2)
+#K=kyotil::getK(z,kernel="rbf",para=rho^-2)
 #system.time({
 #    krm.score.test (y~x, dat, K, regression.type="logistic", verbose=TRUE) 
 #})
