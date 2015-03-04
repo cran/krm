@@ -138,7 +138,7 @@ krm.most = function(formula, data, regression.type=c("logistic","linear"),
         
         # perturbation-based inference 
         } else if (inference.method=="perturbation") {
-            require(MASS)
+            requireNamespace("MASS")
             if (regression.type=="logistic") {            
                 m1=tr(P.h1 %*% K)
                 str(K)
@@ -197,8 +197,8 @@ krm.most = function(formula, data, regression.type=c("logistic","linear"),
         
     end=Sys.time()
     cat("Total time passed: "); print(end-begin)
-
-    if (inference.method!="Davies") {
+    
+    if (inference.method %in% c("parametric.bootstrap","perturbation")) {
         # maximize over # of rhos
         p.chi.sup.1 <- drop(apply(Q.rho.stats["chiI",,,drop=FALSE],1:2,max))
         p.chi.sup.2 <- drop(apply(Q.rho.stats["chiII",,,drop=FALSE],1:2,max))
@@ -212,7 +212,7 @@ krm.most = function(formula, data, regression.type=c("logistic","linear"),
             "normI"=mean(Q.norm.sup.1[-1] > Q.norm.sup.1[1]), 
             "normII"=mean(Q.norm.sup.2[-1] > Q.norm.sup.2[1])
         )
-    } else {
+    } else if (inference.method=="Davies") {
         M = max(Q.rho.stats)
         W = sum(abs(diff(Q.rho.stats)))
         p.values = pnorm(-M) + W*exp(-0.5*(M^2))/sqrt(8*pi)
@@ -221,7 +221,7 @@ krm.most = function(formula, data, regression.type=c("logistic","linear"),
     out=list()
     class(out)=c("krm", class(out))
     out$p.values=p.values
-    out$Q.rho.stats=Q.rho.stats
+    #out$Q.rho.stats=Q.rho.stats
     out
 }
 

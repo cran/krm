@@ -74,6 +74,16 @@ Liu, D., Ghosh, D. and Lin, X. (2008) Estimation and testing for the effect of a
 pathway on a disease outcome using logistic kernel machine regression via logistic mixed
 models, BMC Bioinformatics, 9, 292.
 }
+
+\value{
+A list of class krm
+\item{p.values}{If inference.method=="Davies", a single p-value. If inference.method=="perturbation" or "parametric.bootstrap", 
+a vector of four p-values, named chiI, chiII, normI, normII. For perturbation, chiII and normII are NA.
+chiI/chiII p-values are based on chi-squared approximation and normI/normII are based on normal approximations.
+chiI/normI p-values are based on plugin estimator of  mean and variance of score statistic, chiII/normII are based on modified estimator of mean and variance of score statistic. 
+chiII or normII are more powerful than chiI and normI. For more details, see Fong et al. (2014)}
+}
+
 \examples{
 
 # in addition to the examples listed here, there are more examples 
