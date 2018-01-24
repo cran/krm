@@ -1,4 +1,4 @@
-useDynLib(krm)
+useDynLib(krm, .registration = TRUE)
 
 export(krm.score.test, krm.most)
 export(getSeqKernel)
