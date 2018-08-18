@@ -11,7 +11,7 @@ readFastaFile=function (fileName, sep=" "){
             line.text=readLines(fastaFile,1)
             while ( length(line.text)>0 ) {
                 if (substr(line.text, 0, 1) == ">") break;
-                temp.seq=temp.seq %+% line.text
+                temp.seq=temp.seq %.% line.text
                 line.text=readLines(fastaFile,1)
             }    
             sequences[[name]]=temp.seq
@@ -26,7 +26,7 @@ readFastaFile=function (fileName, sep=" "){
 writeFastaFile=function (seqList, fileName) {
     outFile=file (fileName, open="w")
     for (i in 1:length(seqList)){
-        write (file=outFile, ">"%+%names(seqList)[i], append=T)
+        write (file=outFile, ">"%.%names(seqList)[i], append=T)
         write (file=outFile, seqList[[i]], append=T)
     }
     close(outFile)
@@ -121,7 +121,7 @@ arabic2fastaFile=function (alignment, fileName){
     name=rownames(alignment)
     if (is.null(name)) name=1:nrow(alignment)
     for (i in 1:nrow(alignment)){
-        write (file=outFile, ">"%+%name[i], append=T)
+        write (file=outFile, ">"%.%name[i], append=T)
         write (file=outFile, concatList(aaList[alignment[i,]]), append=T)
     }
     close(outFile)

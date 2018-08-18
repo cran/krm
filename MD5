@@ -1,6 +1,6 @@
-f692bacf037326c2b9b1d062d9f23b73 *ChangeLog
-b1de97ac94f77058ba2804f1ad164174 *DESCRIPTION
-22d61422015208b6ee43b3b09798b01d *NAMESPACE
+d1e5ee69af68e4c0d0dc1cda331e0dd1 *ChangeLog
+37229ff3e978d9db0023335e2f4df1cd *DESCRIPTION
+97f389c639e83bf5e3c9e6170f799194 *NAMESPACE
 c28217a05515649b1915f9906c056930 *R/EQQ.R
 3ed1a91b97c85682a2c982401685a415 *R/dirichlet_functions.R
 a4c4df55da9d3730f984e3270b69ccd1 *R/getSeqKernel.r
@@ -9,7 +9,7 @@ ca9f26884612272cdcadce6dc973c6ad *R/krm.most.R
 6bca58a4b761e36f6cacf978f17fc484 *R/misc.R
 008930cd6661f5328e4df5e1d8318d55 *R/profile_HMM.R
 1fc36f2bcc5166cb1a1e90494ed9eb69 *R/seq_alignment.R
-9393964c40695f069a7a23789debc84c *R/seq_read_write.R
+32d11c2d97aec25202480e1b25bdcd84 *R/seq_read_write.R
 c3e9e5f5939b4ff97b3b52a83b2299bb *R/sim.liu.R
 4738f7e7ed1b18118e95731494a28577 *data/aa.prop.list.rda
 5cd0cf7f75915f51b15c5ed18d49f6fe *data/cloud9.rda
@@ -53,4 +53,4 @@ d48533729d38a49a78b8f754defd73ea *src/ProteinSequence.h
 e9dedb79359c1d90e4d05b7df5372c9a *src/rvgs.h
 f007736f0142440bf4258832f8b2c778 *src/score_var.cpp
 dd6dc41dfad0a8099d25915b1441df8e *src/var_Q.cpp
-e4597cbf81b74e5d2141d898dcbcb85b *tests/doRUnit.R
+ca97af0fdbd98f91a476a5c5c7714503 *tests/doRUnit.R

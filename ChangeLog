@@ -22,4 +22,6 @@
 2013-11-03  Youyi Fong
 	* fix issues causing Solaris compilation errors at the suggestion of Prof.
 	Ripley
-	
+
+2018--8-17
+	* Change to use %.%

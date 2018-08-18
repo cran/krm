@@ -12,7 +12,7 @@ export(readFastaFile, writeFastaFile,
 export(alignment2count, alignment2trancount, calcPairwiseIdentity, removeGap)
 export(rmdirichlet, rdirichlet, ddirichlet, dmdirichlet, modifyDirichlet, logIntegrateDirichlet, logIntegrateMixDirichlet, readPriorFromFile, hmmMargLlik)
 
-importFrom(kyotil, concatList, myprint, myprint.default, expit, DXD, rbern, symprod, txSy, tr, logSumExp, mysapply, "%+%")
+importFrom(kyotil, concatList, myprint, myprint.default, expit, DXD, rbern, symprod, txSy, tr, logSumExp, mysapply, "%.%")
   importFrom("methods", "is")
   importFrom("stats", "coef", "glm", "median", "model.frame",
              "model.matrix", "pchisq", "pnorm", "rgamma", "rnorm",

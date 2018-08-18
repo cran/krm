@@ -7,11 +7,11 @@ if(require("RUnit", quietly=TRUE)) {
   if(Sys.getenv("RCMDCHECK") == "FALSE") {
     ## Path to unit tests for standalone running under Makefile (not R CMD check)
     ## PKG/tests/../inst/unitTests
-    path<-tempdir()
+    path <- file.path(getwd(), "unitTests")
   } else {
     ## Path to unit tests for R CMD check
     ## PKG.Rcheck/tests/../PKG/unitTests
-    path <- tempdir()
+    path <- system.file("unitTests", package=pkg)
   }
   cat("\nRunning unit tests\n")
   print(list(pkg=pkg, getwd=getwd(), pathToUnitTests=path))
@@ -34,17 +34,18 @@ if(require("RUnit", quietly=TRUE)) {
  
   ## Default report name
   pathReport <- file.path(path, "report")
+  
  
   ## Report to stdout and text files
   cat("------------------- UNIT TEST SUMMARY ---------------------\n\n")
   printTextProtocol(tests, showDetails=FALSE)
-  printTextProtocol(tests, showDetails=FALSE,
-                    fileName=paste(pathReport, "Summary.txt", sep=""))
-  printTextProtocol(tests, showDetails=TRUE,
-                    fileName=paste(pathReport, ".txt", sep=""))
- 
-  ## Report to HTML file
-  printHTMLProtocol(tests, fileName=paste(pathReport, ".html", sep=""))
+#  printTextProtocol(tests, showDetails=FALSE,
+#                    fileName=paste(pathReport, "Summary.txt", sep=""))
+#  printTextProtocol(tests, showDetails=TRUE,
+#                    fileName=paste(pathReport, ".txt", sep=""))
+# 
+#  ## Report to HTML file
+#  printHTMLProtocol(tests, fileName=paste(pathReport, ".html", sep=""))
  
   ## Return stop() to cause R CMD check stop in case of
   ##  - failures i.e. FALSE to unit tests or
