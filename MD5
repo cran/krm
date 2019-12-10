@@ -1,5 +1,5 @@
-d1e5ee69af68e4c0d0dc1cda331e0dd1 *ChangeLog
-37229ff3e978d9db0023335e2f4df1cd *DESCRIPTION
+b830a0bffa891d2e4fd8731b1a640577 *ChangeLog
+6d5ac80710699badce6b1ae82bc31039 *DESCRIPTION
 97f389c639e83bf5e3c9e6170f799194 *NAMESPACE
 c28217a05515649b1915f9906c056930 *R/EQQ.R
 3ed1a91b97c85682a2c982401685a415 *R/dirichlet_functions.R
@@ -20,7 +20,7 @@ a616e808bd826e929f56223020649675 *inst/unitTests/Makefile
 f5603c25cdff9c9cbc647efee4f2b2fd *inst/unitTests/report.txt
 515b18df7e17596dc38b9dbea407b26f *inst/unitTests/runRUnitTests.R
 1b8e6c7c36acf91bd4baa40b3b8b7fad *inst/unitTests/runit.getSeqKernel.R
-97f1a4bb8aed1530972e070ff0da9e66 *inst/unitTests/runit.krm.most.R
+cbdceb0c8144dea113c8dfc90b4f119f *inst/unitTests/runit.krm.most.R
 2ffecd00d09c454e7ded8dfe37a905a2 *inst/unitTests/runit.krm.score.test.R
 cd44d05946a35795593e0921c2712c42 *man/aa.prop.list.Rd
 fccaa08ec07e2deb260ed3e10d3c1eab *man/chi.norm.Rd
@@ -29,7 +29,7 @@ fccaa08ec07e2deb260ed3e10d3c1eab *man/chi.norm.Rd
 b845fcaeac649b9257b1a974899c0dbe *man/getSeqKernel.Rd
 36be5e985e9560a2122e2280c9c6dc92 *man/krm.Rd
 41f78d960f6830baf2d8340b5122c21a *man/krm.most.Rd
-190d5b54f2aee8ad5b8ec08ad39325f3 *man/krm.score.test.Rd
+b99fcc5daef91d61d6d55fef098b6c4e *man/krm.score.test.Rd
 2f0b1380158ef5d6824d0bb2824bc461 *man/profile_HMM.Rd
 da12db8bcc82d7985a646210e6c66d72 *man/seq_alignment.Rd
 26eea14c34116f2a4570747b60cc9552 *man/seq_read_write.Rd
@@ -38,7 +38,7 @@ da12db8bcc82d7985a646210e6c66d72 *man/seq_alignment.Rd
 afff9ce1d6a8cd88c2d0c25f3f75c55c *src/DirichletRV.h
 6d45922544b73aad428eb8e399ceef13 *src/MI_kernel.cpp
 2a6f9e9e044a78154d3cfda5936d6f48 *src/Makevars
-429b001713d09ce3a20c0e03325359c9 *src/Makevars.win
+c7c9808af3134e3aa3c273aec6ca5105 *src/Makevars.win
 b3c61a26e1c6b5dac442f6207c17c64a *src/MathPlus.h
 5de86dd659ae4391abaed9f1272e0009 *src/MixtureDirichletRV.cpp
 3674bb362d4ff5ad8addd54170756c54 *src/MixtureDirichletRV.h
@@ -48,7 +48,7 @@ d48533729d38a49a78b8f754defd73ea *src/ProteinSequence.h
 4f7f6205e02dde76808fdcb8ae60a9f6 *src/RandomPlus.h
 74d9be058c2864ff19f1e337e029b399 *src/StatPlus.h
 2f10d846286e8ad5006cae73d2b33820 *src/U.h
-7c22b1b500cab25872924e218f1645f5 *src/registerDynamicSymbol.c
+ccc4f8e1c281a0148946bf412ca9adb2 *src/registerDynamicSymbol.c
 9597814309f5c4b104f7d4bb6320a8ea *src/rvgs.cpp
 e9dedb79359c1d90e4d05b7df5372c9a *src/rvgs.h
 f007736f0142440bf4258832f8b2c778 *src/score_var.cpp

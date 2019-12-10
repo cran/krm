@@ -5,10 +5,11 @@ library("krm")
 test.krm.mos.test <- function() {
 
 
-tolerance=1e-3
+tolerance=1e-3; verbose=FALSE
 # more stringent tolerance for one system to ensure algorithm accuracy
 if(file.exists("D:/gDrive/3software/_checkReproducibility")) {
     tolerance=1e-6
+    verbose=TRUE # affects some stopifnot check statements in krm.most.R
 } 
 RNGkind("Mersenne-Twister", "Inversion")
 dat.file.name=paste(system.file(package="krm")[1],'/misc/y1.txt', sep="") # needed for testing kernel sequences
@@ -22,12 +23,12 @@ seq.file.name=paste(system.file(package="krm")[1],'/misc/sim1.fasta', sep="") # 
 
 # parametric bootstrap
 data=sim.liu.2008 (n=100, a=.1, seed=1) 
-test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", n.rho=2, n.mc = 100, range.rho=.99, verbose=TRUE)
+test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", n.rho=2, n.mc = 100, range.rho=.99, verbose=verbose)
 checkEqualsNumeric(test$p.values, c(0.91,   0.90,   0.93,   0.91), tolerance = tolerance)
 
 # perturbation
 data=sim.liu.2008 (n=100, a=.1, seed=1) 
-test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", n.rho=2, n.mc = 100, inference.method="perturbation", verbose=TRUE)
+test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", n.rho=2, n.mc = 100, inference.method="perturbation", verbose=verbose)
 # mvrnorm behaves differently between 32 bit and 64 bit
 if (R.Version()$system %in% c("x86_64, mingw32")) {
     checkEqualsNumeric(test$p.values, c(0.87,     NA,   0.89,     NA), tolerance = tolerance)
@@ -35,7 +36,7 @@ if (R.Version()$system %in% c("x86_64, mingw32")) {
 
 # LGL2008
 data=sim.liu.2008 (n=50, a=.1, seed=1) 
-test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", n.mc = 100, range.rho=.99, inference.method="Davies", verbose=TRUE)
+test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", n.mc = 100, range.rho=.99, inference.method="Davies", verbose=verbose)
 checkEqualsNumeric(test$p.values, 0.1223421, tolerance = tolerance)
 
 # todo: add linear kernel
@@ -50,13 +51,13 @@ checkEqualsNumeric(test$p.values, 0.1223421, tolerance = tolerance)
 dat=read.table(dat.file.name); names(dat)="y"
 dat=cbind(dat, seq=unlist(readFastaFile(seq.file.name))); dat$seq=as.character(dat$seq)
 
-test = krm.most (y~1, dat, regression.type="logistic", seq.file.name=seq.file.name, kern.type="mi", n.rho=2, n.mc = 5e1, inference.method="parametric.bootstrap", verbose=TRUE)
+test = krm.most (y~1, dat, regression.type="logistic", seq.file.name=seq.file.name, kern.type="mi", n.rho=2, n.mc = 5e1, inference.method="parametric.bootstrap", verbose=verbose)
 checkEqualsNumeric(test$p.values, c(0.68,   0.60,   0.66,   0.60), tolerance = tolerance)
 
-test.2 = krm.most (y~1, dat, regression.type="logistic", formula.kern=~seq, kern.type="mi", n.rho=2, n.mc = 5e1, inference.method="parametric.bootstrap", verbose=TRUE)
+test.2 = krm.most (y~1, dat, regression.type="logistic", formula.kern=~seq, kern.type="mi", n.rho=2, n.mc = 5e1, inference.method="parametric.bootstrap", verbose=verbose)
 checkEqualsNumeric(test.2$p.values, c(0.68,   0.60,   0.66,   0.60), tolerance = tolerance)
 
-test.3 = krm.most (y~1, dat, regression.type="logistic", formula.kern=~seq, kern.type="mi", n.rho=2, n.mc = 5e1, inference.method="parametric.bootstrap", seq.start=1, seq.end=10, verbose=TRUE)
+test.3 = krm.most (y~1, dat, regression.type="logistic", formula.kern=~seq, kern.type="mi", n.rho=2, n.mc = 5e1, inference.method="parametric.bootstrap", seq.start=1, seq.end=10, verbose=verbose)
 checkEqualsNumeric(test.3$p.values, c(0.62,   0.48,   0.54,   0.46), tolerance = tolerance)
 
 
@@ -64,7 +65,7 @@ checkEqualsNumeric(test.3$p.values, c(0.62,   0.48,   0.54,   0.46), tolerance =
 
 #data=sim.liu.2008 (n=50, a=.1, seed=1) 
 #system.time({
-#    test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", inference.method="LGL2008", verbose=FALSE)
+#    test = krm.most(y~x, data, regression.type="logistic", formula.kern=~z.1+z.2+z.3+z.4+z.5, kern.type="rbf", inference.method="LGL2008", verbose=verbose)
 #})
 ## On gizmo
 ## parametric.bootstrap
@@ -80,7 +81,7 @@ checkEqualsNumeric(test.3$p.values, c(0.62,   0.48,   0.54,   0.46), tolerance =
 
 #dat=read.table(dat.file.name); names(dat)="y"
 #system.time({
-#    test = krm.most (y~1, dat, regression.type="logistic", seq.file.name=seq.file.name, kern.type="mi", n.rho=2, inference.method="parametric.bootstrap", verbose=TRUE)
+#    test = krm.most (y~1, dat, regression.type="logistic", seq.file.name=seq.file.name, kern.type="mi", n.rho=2, inference.method="parametric.bootstrap", verbose=verbose)
 #})
 
 

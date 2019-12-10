@@ -4,24 +4,28 @@
 
 2013-10-20  V_0.0.4 Youyi Fong
 
-    * add linear regression	
-	* copy Saheli's code to make sim.liu simulate datasets for power study and
-	not just size study, one difference from previous version is that, also
-	rename sim.liu to sim.liu.2008
+    * add linear regression 
+    * copy Saheli's code to make sim.liu simulate datasets for power study and
+    not just size study, one difference from previous version is that, also
+    rename sim.liu to sim.liu.2008
 
 2013-10-20  V_0.0.5 Youyi Fong
-	* Krisz optimize krm.score.test. n=100, the speed improvement is 2.5 fold,
-	n=200, the speed improvement is 3 fold.
-	* Copy several matrix functions from Krisz's kutil package
+    * Krisz optimize krm.score.test. n=100, the speed improvement is 2.5 fold,
+    n=200, the speed improvement is 3 fold.
+    * Copy several matrix functions from Krisz's kutil package
 
 2013-10-31  Youyi Fong
-	* replace variable length array with std::vector<> at the suggestion of Prof.
-	Ripley 
-	* replace 2D arrays used in proteinsequence.cpp with new int[]
+    * replace variable length array with std::vector<> at the suggestion of Prof.
+    Ripley 
+    * replace 2D arrays used in proteinsequence.cpp with new int[]
 
 2013-11-03  Youyi Fong
-	* fix issues causing Solaris compilation errors at the suggestion of Prof.
-	Ripley
+    * fix issues causing Solaris compilation errors at the suggestion of Prof.
+    Ripley
 
-2018--8-17
-	* Change to use %.%
+2018-08-17
+    * Change to use %.%
+
+2019-12-10
+    * On r-devel-linux-x86_64-debian-clang, some random procedures give different results from what are expected
+    * Fix U.h:248:3: warning: ignoring return value of function declared with 'warn_unused_result' attribute [-Wunused-result]
