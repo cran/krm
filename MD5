@@ -1,5 +1,5 @@
-b830a0bffa891d2e4fd8731b1a640577 *ChangeLog
-6d5ac80710699badce6b1ae82bc31039 *DESCRIPTION
+ba8246cd7b5f77fdc473c303075ee492 *ChangeLog
+44b30f364ac37c5894d915248f25387d *DESCRIPTION
 97f389c639e83bf5e3c9e6170f799194 *NAMESPACE
 c28217a05515649b1915f9906c056930 *R/EQQ.R
 3ed1a91b97c85682a2c982401685a415 *R/dirichlet_functions.R
@@ -47,10 +47,10 @@ b3c61a26e1c6b5dac442f6207c17c64a *src/MathPlus.h
 d48533729d38a49a78b8f754defd73ea *src/ProteinSequence.h
 4f7f6205e02dde76808fdcb8ae60a9f6 *src/RandomPlus.h
 74d9be058c2864ff19f1e337e029b399 *src/StatPlus.h
-2f10d846286e8ad5006cae73d2b33820 *src/U.h
+49d993ef1d6e69a36177c962bef6d4fe *src/U.h
 ccc4f8e1c281a0148946bf412ca9adb2 *src/registerDynamicSymbol.c
 9597814309f5c4b104f7d4bb6320a8ea *src/rvgs.cpp
 e9dedb79359c1d90e4d05b7df5372c9a *src/rvgs.h
 f007736f0142440bf4258832f8b2c778 *src/score_var.cpp
 dd6dc41dfad0a8099d25915b1441df8e *src/var_Q.cpp
-ca97af0fdbd98f91a476a5c5c7714503 *tests/doRUnit.R
+2c3a8e19320a0aeeb42ee34219e3e164 *tests/doRUnit.R

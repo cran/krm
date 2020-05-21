@@ -33,7 +33,7 @@ if(require("RUnit", quietly=TRUE)) {
   tests <- runTestSuite(testSuite)
  
   ## Default report name
-  pathReport <- file.path(path, "report")
+  pathReport <- tempdir()
   
  
   ## Report to stdout and text files

@@ -243,23 +243,23 @@ public:
 	    return 0;
 	}
 
-	static void sendMailOnUnix(string to, string body) {
-		char cwd[100];
-		getcwd(cwd, 100);
-		string scwd(cwd);
-		
-		char hostname[100];
-		FILE *fhostname = popen("hostname", "r");
-		fgets(hostname, 100, fhostname);
-		string shostname(hostname);
-		
-		string subj=shostname.substr(0, shostname.length()-1)+scwd;
-		
-		string cmd="/usr/bin/mail -s '"+subj+"' "+to;
-		FILE *mailer = popen(cmd.c_str(), "w");
-		fprintf(mailer, "%s", body.c_str());
-		pclose(mailer); 
-	}
+//	static void sendMailOnUnix(string to, string body) {
+//		char cwd[100];
+//		(void) getcwd(cwd, 100);
+//		string scwd(cwd);
+//		
+//		char hostname[100];
+//		FILE *fhostname = popen("hostname", "r");
+//		(void) fgets(hostname, 100, fhostname);
+//		string shostname(hostname);
+//		
+//		string subj=shostname.substr(0, shostname.length()-1)+scwd;
+//		
+//		string cmd="/usr/bin/mail -s '"+subj+"' "+to;
+//		FILE *mailer = popen(cmd.c_str(), "w");
+//		fprintf(mailer, "%s", body.c_str());
+//		pclose(mailer); 
+//	}
 
 	static int finishUp (int argc, char *argv[], string _msg, time_t& t0, ostream& logFile, string email="") {
 		stringstream msg;
@@ -286,8 +286,8 @@ public:
 		logFile << msg.str(); 
 		//if (logFile!=cout) cout << msg.str();// comment out b/c R CMD check complains
 
-		if (email!="" and minPassed > 5) 
-			U::sendMailOnUnix(email, msg.str());
+//		if (email!="" and minPassed > 5) 
+//			U::sendMailOnUnix(email, msg.str());
 		
 		#ifdef __DEBUG__		
 		//cout << "\nDone. Please press ENTER to continue..." << endl;

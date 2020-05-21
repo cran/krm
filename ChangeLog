@@ -29,3 +29,6 @@
 2019-12-10
     * On r-devel-linux-x86_64-debian-clang, some random procedures give different results from what are expected
     * Fix U.h:248:3: warning: ignoring return value of function declared with 'warn_unused_result' attribute [-Wunused-result]
+
+2020-05-19
+    * Comment out sendMailOnUnix in U.h to avoid warning at CRAN check
