@@ -344,7 +344,7 @@ double ProteinSequence::pairwiseDistance (int i1, int i2, int length, std::vecto
 	int diff=0;
 	int actual_length=0;
 	for (int t=0; t<length; t++) {
-		if ((seq1[positions[t]]!=20) | (seq2[positions[t]]!=20)) actual_length++;
+		if ((seq1[positions[t]]!=20) || (seq2[positions[t]]!=20)) actual_length++;
 		if (seq1[positions[t]]!=seq2[positions[t]]) diff++;
 	}
 	

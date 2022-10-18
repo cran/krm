@@ -1,10 +1,10 @@
-ba8246cd7b5f77fdc473c303075ee492 *ChangeLog
-44b30f364ac37c5894d915248f25387d *DESCRIPTION
+437df66bc7caae11a3edeb7424ba6e4b *ChangeLog
+bb279bba6c5d46266f4a34ed74a8e021 *DESCRIPTION
 97f389c639e83bf5e3c9e6170f799194 *NAMESPACE
 c28217a05515649b1915f9906c056930 *R/EQQ.R
 3ed1a91b97c85682a2c982401685a415 *R/dirichlet_functions.R
 a4c4df55da9d3730f984e3270b69ccd1 *R/getSeqKernel.r
-ca9f26884612272cdcadce6dc973c6ad *R/krm.most.R
+ce39f936fc77013d8f9a8e2e934de892 *R/krm.most.R
 138f4b6e32c8d064319449684bd42685 *R/krm.score.test.R
 6bca58a4b761e36f6cacf978f17fc484 *R/misc.R
 008930cd6661f5328e4df5e1d8318d55 *R/profile_HMM.R
@@ -20,7 +20,7 @@ a616e808bd826e929f56223020649675 *inst/unitTests/Makefile
 f5603c25cdff9c9cbc647efee4f2b2fd *inst/unitTests/report.txt
 515b18df7e17596dc38b9dbea407b26f *inst/unitTests/runRUnitTests.R
 1b8e6c7c36acf91bd4baa40b3b8b7fad *inst/unitTests/runit.getSeqKernel.R
-cbdceb0c8144dea113c8dfc90b4f119f *inst/unitTests/runit.krm.most.R
+47003693db3693cd4fff688f889d9d3b *inst/unitTests/runit.krm.most.R
 2ffecd00d09c454e7ded8dfe37a905a2 *inst/unitTests/runit.krm.score.test.R
 cd44d05946a35795593e0921c2712c42 *man/aa.prop.list.Rd
 fccaa08ec07e2deb260ed3e10d3c1eab *man/chi.norm.Rd
@@ -43,7 +43,7 @@ b3c61a26e1c6b5dac442f6207c17c64a *src/MathPlus.h
 5de86dd659ae4391abaed9f1272e0009 *src/MixtureDirichletRV.cpp
 3674bb362d4ff5ad8addd54170756c54 *src/MixtureDirichletRV.h
 5edc42b03c83006ffbc9ff18983ed928 *src/Observable.h
-49a484c2ab97c7d575789cdc004b1662 *src/ProteinSequence.cpp
+12a946261505e6b279599e4ff8ee5449 *src/ProteinSequence.cpp
 d48533729d38a49a78b8f754defd73ea *src/ProteinSequence.h
 4f7f6205e02dde76808fdcb8ae60a9f6 *src/RandomPlus.h
 74d9be058c2864ff19f1e337e029b399 *src/StatPlus.h

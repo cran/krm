@@ -32,3 +32,6 @@
 
 2020-05-19
     * Comment out sendMailOnUnix in U.h to avoid warning at CRAN check
+
+2022-10-17
+    * Update unit testing

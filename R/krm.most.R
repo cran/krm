@@ -29,7 +29,7 @@ krm.most = function(formula, data, regression.type=c("logistic","linear"),
     
     # save rng state before set.seed in order to restore before exiting this function
     save.seed <- try(get(".Random.seed", .GlobalEnv), silent=TRUE) 
-    if (class(save.seed)=="try-error") {        
+    if (inherits(save.seed,"try-error")) {        
         set.seed(1)
         save.seed <- get(".Random.seed", .GlobalEnv)
     }                        
